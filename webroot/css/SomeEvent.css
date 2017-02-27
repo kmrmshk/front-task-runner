@@ -1,0 +1,12 @@
+.hogehoge__elem:before {
+  content: '';
+}
+
+.hugahuga__elem:before {
+  content: '';
+}
+
+.b_block__heading {
+  margin: 0;
+  padding: 0;
+}

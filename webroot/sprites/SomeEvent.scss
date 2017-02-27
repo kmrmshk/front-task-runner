@@ -1,0 +1,99 @@
+// SASS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home
+//   width: $icon-home-width
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites
+$500px-png-name: '500px.png'
+$500px-png-x: 0px
+$500px-png-y: 0px
+$500px-png-offset-x: 0px
+$500px-png-offset-y: 0px
+$500px-png-width: 48px
+$500px-png-height: 48px
+$500px-png-total-width: 106px
+$500px-png-total-height: 106px
+$500px-png-image: 'SomeEvent.png'
+$500px-png: (0px, 0px, 0px, 0px, 48px, 48px, 106px, 106px, 'SomeEvent.png', '500px.png', )
+$adjust-png-name: 'adjust.png'
+$adjust-png-x: 58px
+$adjust-png-y: 0px
+$adjust-png-offset-x: -58px
+$adjust-png-offset-y: 0px
+$adjust-png-width: 48px
+$adjust-png-height: 48px
+$adjust-png-total-width: 106px
+$adjust-png-total-height: 106px
+$adjust-png-image: 'SomeEvent.png'
+$adjust-png: (58px, 0px, -58px, 0px, 48px, 48px, 106px, 106px, 'SomeEvent.png', 'adjust.png', )
+$adn-png-name: 'adn.png'
+$adn-png-x: 0px
+$adn-png-y: 58px
+$adn-png-offset-x: 0px
+$adn-png-offset-y: -58px
+$adn-png-width: 48px
+$adn-png-height: 48px
+$adn-png-total-width: 106px
+$adn-png-total-height: 106px
+$adn-png-image: 'SomeEvent.png'
+$adn-png: (0px, 58px, 0px, -58px, 48px, 48px, 106px, 106px, 'SomeEvent.png', 'adn.png', )
+$spritesheet-width: 106px
+$spritesheet-height: 106px
+$spritesheet-image: 'SomeEvent.png'
+$spritesheet-sprites: ($500px-png, $adjust-png, $adn-png, )
+$spritesheet: (106px, 106px, 'SomeEvent.png', $spritesheet-sprites, )
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home
+//   @include sprite-width($icon-home)
+//
+// .icon-email
+//   @include sprite($icon-email)
+//
+// Example usage in HTML:
+//   `display: block` sprite:
+//   <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//   // CSS
+//   .icon {
+//     display: inline-block;
+//   }
+//
+//   // HTML
+//   <i class="icon icon-home"></i>
+@mixin sprite-width($sprite)
+  width: nth($sprite, 5)
+
+@mixin sprite-height($sprite)
+  height: nth($sprite, 6)
+
+@mixin sprite-position($sprite)
+  $sprite-offset-x: nth($sprite, 3)
+  $sprite-offset-y: nth($sprite, 4)
+  background-position: $sprite-offset-x  $sprite-offset-y
+
+@mixin sprite-image($sprite)
+  $sprite-image: nth($sprite, 9)
+  background-image: url(#{$sprite-image})
+
+@mixin sprite($sprite)
+  @include sprite-image($sprite)
+  @include sprite-position($sprite)
+  @include sprite-width($sprite)
+  @include sprite-height($sprite)
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SASS
+//
+// @include sprites($spritesheet-sprites)
+@mixin sprites($sprites)
+  @each $sprite in $sprites
+    $sprite-name: nth($sprite, 10)
+    .#{$sprite-name}
+      @include sprite($sprite)
