@@ -2,6 +2,19 @@
 
 オレオレタスクランナー動作サンプル
 
+## セットアップ
+
+まずはclone
+```
+git clone https://github.com/kmrmshk/front-task-runner.git
+```
+
+cloneしたディレクトリに移動してモジュールインストール
+
+```
+npm i
+```
+
 ## コマンド
 
 ### `npm run sass`
