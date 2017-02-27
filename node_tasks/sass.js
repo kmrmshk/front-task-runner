@@ -62,6 +62,7 @@ function bundleExecute(option){
 // arguments
 var args = process.argv.slice(2);
 
+/*
 if(args.length){
     _.each(args, function(profileKey){
         if(config.hasOwnProperty(profileKey)){
@@ -74,3 +75,7 @@ else {
         bundleExecute(option);
     });
 }
+*/
+_.each(config, function(option) {
+    bundleExecute(option);
+});
